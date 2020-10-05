@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine.Experimental.Rendering.Universal;
+﻿using UnityEngine.Experimental.Rendering.Universal;
 using UnityEngine;
 
 public class LightingFlicker : MonoBehaviour {
@@ -30,14 +28,28 @@ public class LightingFlicker : MonoBehaviour {
         lightComponent.pointLightInnerRadius = sinCalc.innerRadius;
         lightComponent.pointLightOuterRadius = sinCalc.outerRadius;
         lightComponent.intensity = sinCalc.intensity;
+        lightComponent.color = sinCalc.color;
     }
 
     // Update is called once per frame
     public void Update() {
+        if(IsOnScreen()) {
+            if (!lightComponent.enabled) {
+                lightComponent.enabled = true;
+            }
+            FlickerLights();
+        }
+        else {
+            if(lightComponent.enabled) {
+                lightComponent.enabled = false;
+            }
+        }
+    }
 
+    private void FlickerLights() {
         Vector2 newPosition = transform.position;
 
-        if(isVerticalFlicker) {
+        if (isVerticalFlicker) {
             newPosition.y = initialPosition + sinCalc.GetSinVariation();
         }
         else {
@@ -45,5 +57,15 @@ public class LightingFlicker : MonoBehaviour {
         }
 
         transform.position = newPosition;
+    }
+
+
+    //culling the lights
+    private bool IsOnScreen() {
+        Vector3 lightPosition = Camera.main.WorldToViewportPoint(gameObject.transform.position);
+
+
+
+        return !(lightPosition.x <= 0 || lightPosition.x >= 1 || lightPosition.y >= 1 || lightPosition.y <= 0);
     }
 }

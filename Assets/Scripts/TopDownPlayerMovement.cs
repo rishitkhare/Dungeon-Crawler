@@ -1,7 +1,16 @@
 ﻿using System;
 using UnityEngine;
 
+enum PlayerState {
+    Idle,
+    Walking,
+    Attacking,
+    Knockback,
+    Frozen
+}
+
 [RequireComponent(typeof(SimpleRigidbody))]
+[RequireComponent(typeof(Health))]
 public class TopDownPlayerMovement : MonoBehaviour {
     public float Speed = 4f;
     public Vector2 input = Vector2.zero;
@@ -65,14 +74,6 @@ public class TopDownPlayerMovement : MonoBehaviour {
         }
 
         myAnimator.SetBool(isIdleHash, !isMoving);
-
-        //flip axis according to direction
-        if (rb.GetDirection().Equals(Vector2.right)) {
-            spr.flipX = true;
-        }
-        else {
-            spr.flipX = false;
-        }
 
     }
 

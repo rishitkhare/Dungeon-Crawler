@@ -7,6 +7,7 @@ public class UniversalSinCalculator : MonoBehaviour
     public float innerRadius = 0.33f;
     public float outerRadius = 3.47f;
     public float intensity = 1.59f;
+    public Color color;
 
     private float sinVariation;
     private float counter;
