@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
 
 public class Health : MonoBehaviour
@@ -7,33 +6,38 @@ public class Health : MonoBehaviour
     public int healthCapacity = 6;
     public BoxCollider2D hurtBox;
 
-    private int healthPts;
+    private TopDownPlayerController controller;
+
+    public int HealthPts { get; private set; }
 
     // Start is called before the first frame update
     void Awake()
     {
-        healthPts = healthCapacity;
+        HealthPts = healthCapacity;
+        controller = gameObject.GetComponent<TopDownPlayerController>();
     }
 
     public void TakeDamage(int damageLoss) {
-        healthPts -= Mathf.Abs(damageLoss);
+        HealthPts -= Mathf.Abs(damageLoss);
 
-        if(healthPts <= 0) {
+        if(HealthPts <= 0) {
 
         }
     }
 
     public void GainHealth(int gainedHealth) {
-        healthPts += Mathf.Abs(gainedHealth);
+        HealthPts += Mathf.Abs(gainedHealth);
     }
 
     public int GetHealthPts() {
-        return healthPts;
+        return HealthPts;
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {
+        Debug.Log("TriggerEnter");
         if(collision.CompareTag("PlayerHurt")) {
-
+            TakeDamage(1);
+            controller.state = PlayerState.Knockback;
         }
     }
 

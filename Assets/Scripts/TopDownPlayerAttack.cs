@@ -1,49 +1,54 @@
 ﻿using System;
 using UnityEngine;
 
-[RequireComponent (typeof(TopDownPlayerMovement))]
+[RequireComponent (typeof(TopDownPlayerController))]
 public class TopDownPlayerAttack : MonoBehaviour
 {
     public string attackButtonName = "Attack";
 
     public event EventHandler PlayerAttack;
 
-    public string attackAnimatorBooleanParameter = "AttackBool";
-    int attackAnimatorBoolHash;
-
     public float attackEndLag = 0.4f;
-    float attackTimer = 0f;
+    float attackTimer;
+    Boolean isAttacking;
 
     SimpleRigidbody rb;
+    TopDownPlayerController controller;
 
     Animator anim;
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start() {
         rb = gameObject.GetComponent<SimpleRigidbody>();
+        controller = gameObject.GetComponent<TopDownPlayerController>();
         anim = gameObject.GetComponent<Animator>();
-        attackAnimatorBoolHash = Animator.StringToHash(attackAnimatorBooleanParameter);
-
+        isAttacking = false;
     }
 
     // Update is called once per frame
     void Update() {
 
         if(Input.GetButtonDown(attackButtonName)) {
+            Attack();
             attackTimer = attackEndLag;
-            PlayerAttack?.Invoke(this, new DirectionArgs(rb.GetDirection()));
-            anim.SetBool(attackAnimatorBoolHash, true);
         }
 
-        //timer + animation parameters
-        if (attackTimer > 0f) {
+        if(isAttacking) {
             attackTimer -= Time.deltaTime;
-            rb.LockMovement();
-            rb.LockDirection();
+            AttackEndLag();
         }
-        else {
-            anim.SetBool(attackAnimatorBoolHash, false);
+    }
+
+    void Attack() {
+        controller.state = PlayerState.Attacking;
+        isAttacking = true;
+        anim.SetTrigger("Attack");
+        PlayerAttack?.Invoke(this, new AttackEventArgs(rb.GetDirection(), attackEndLag));
+    }
+
+    void AttackEndLag() {
+        if(attackTimer <= 0f) {
+            controller.state = PlayerState.Idle;
+            isAttacking = false;
         }
-        
     }
 }

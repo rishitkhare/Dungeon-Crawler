@@ -11,10 +11,8 @@ public class AttackAnimator : MonoBehaviour
 {
 
     TopDownPlayerAttack playerAttackComponent;
-    SpriteRenderer spriteRenderer;
-    BoxCollider2D boxCollider;
+    BoxCollider2D playerHitBox;
     Animator animator;
-    Animator playerMovementAnimator;
 
     public float attackRange = 1f;
 
@@ -26,24 +24,22 @@ public class AttackAnimator : MonoBehaviour
     void Awake()
     {
         playerAttackComponent = transform.parent.GetComponentInParent<TopDownPlayerAttack>();
-        playerMovementAnimator = transform.parent.GetComponentInParent<Animator>();
 
-        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
-        boxCollider = gameObject.GetComponent<BoxCollider2D>();
+        playerHitBox = transform.parent.GetComponentInParent<BoxCollider2D>();
         animator = gameObject.GetComponent<Animator>();
 
         attackParameterHash = Animator.StringToHash(attackParameterName);
         playerAttackParameterHash = Animator.StringToHash(playerAttackParameter);
 
-        playerAttackComponent.PlayerAttack += SetAnimation;
+       playerAttackComponent.PlayerAttack += SetAnimation;
     }
 
     void SetAnimation(object sender, EventArgs e) {
 
-        Vector2 direction = ((DirectionArgs)e).direction;
+        Vector2 direction = ((AttackEventArgs)e).direction;
 
         //positioning
-        transform.localPosition = Vector2.zero;
+        transform.localPosition = playerHitBox.offset;
         transform.localPosition += (Vector3) direction;
 
         //rotation of sprite (assumes the picture is facing up)
@@ -55,12 +51,5 @@ public class AttackAnimator : MonoBehaviour
 
     void SetAnimationTrigger() {
         animator.SetTrigger(attackParameterHash);
-        playerMovementAnimator.SetTrigger(playerAttackParameterHash);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
