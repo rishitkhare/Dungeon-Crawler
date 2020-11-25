@@ -1,0 +1,856 @@
+fileFormatVersion: 2
+guid: 8f8cb7efb872f4e04ac20a6fc1ad5f19
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 8424204846928545950
+    second: Heart clone_0
+  - first:
+      213: -253066007772563356
+    second: Heart clone_1
+  - first:
+      213: 7138270961905218556
+    second: Heart clone_2
+  - first:
+      213: -5138726667252605163
+    second: Heart clone_3
+  - first:
+      213: -2142386492933470984
+    second: Heart clone_4
+  - first:
+      213: -4054638315197909759
+    second: Heart clone_5
+  - first:
+      213: -3432957581224715098
+    second: Heart clone_6
+  - first:
+      213: 682352297909445478
+    second: Heart clone_7
+  - first:
+      213: 726167516923309820
+    second: Heart clone_8
+  - first:
+      213: -2316258707681910691
+    second: Heart clone_9
+  - first:
+      213: -849798680798682690
+    second: Heart clone_10
+  - first:
+      213: 8983097900818829549
+    second: Heart clone_11
+  - first:
+      213: 4604446959895037113
+    second: Heart clone_12
+  - first:
+      213: 5224861124741576404
+    second: Heart clone_13
+  - first:
+      213: 2986576112703039248
+    second: Heart clone_14
+  - first:
+      213: -6289148663894232852
+    second: Heart clone_15
+  - first:
+      213: 1663438129088908137
+    second: Heart clone_16
+  - first:
+      213: -6061665793689352947
+    second: Heart clone_17
+  - first:
+      213: 4591401749089235857
+    second: Heart clone_18
+  - first:
+      213: 556243698005398363
+    second: Heart clone_19
+  - first:
+      213: -1521070469388051273
+    second: Heart clone_20
+  - first:
+      213: -4618613488350233305
+    second: Heart clone_21
+  - first:
+      213: 3215165630508710972
+    second: Heart clone_22
+  - first:
+      213: -5288765604870021219
+    second: Heart clone_23
+  - first:
+      213: -2996316833007062578
+    second: Heart clone_24
+  - first:
+      213: -1444659562545238116
+    second: Heart clone_25
+  - first:
+      213: 3437641893839581569
+    second: Heart clone_26
+  - first:
+      213: 4936196511197210015
+    second: Heart clone_27
+  - first:
+      213: -1353400425420037447
+    second: Heart clone_28
+  - first:
+      213: -1902184943435347408
+    second: Heart clone_29
+  - first:
+      213: 8444396808372626284
+    second: Heart clone_30
+  - first:
+      213: -7807957656555628126
+    second: Heart clone_31
+  - first:
+      213: -3212217422734956550
+    second: Heart clone_32
+  - first:
+      213: 1586826100720111839
+    second: Heart clone_33
+  - first:
+      213: -2459056774701055182
+    second: Heart clone_34
+  - first:
+      213: -2666029342123400700
+    second: Heart clone_35
+  - first:
+      213: 7111493818873358000
+    second: Heart clone_36
+  - first:
+      213: -4502319076826647846
+    second: Heart clone_37
+  - first:
+      213: -6460627786470712715
+    second: Heart clone_38
+  - first:
+      213: -638552596815487674
+    second: Heart clone_39
+  - first:
+      213: -1996888705929545512
+    second: Heart clone_40
+  - first:
+      213: -4982365956407950983
+    second: Heart clone_41
+  - first:
+      213: -7563390515817014284
+    second: Heart clone_42
+  - first:
+      213: 5292830645827443783
+    second: Heart clone_43
+  - first:
+      213: -4369701405856992317
+    second: Heart clone_44
+  - first:
+      213: 327786491867689619
+    second: Heart clone_45
+  - first:
+      213: 1330278013036192341
+    second: Heart clone_46
+  - first:
+      213: -3409931112990927624
+    second: Heart clone_47
+  - first:
+      213: 154653594710925319
+    second: Heart clone_48
+  - first:
+      213: -7107396274845005767
+    second: Heart clone_49
+  - first:
+      213: -7854988147693375661
+    second: Heart clone_50
+  - first:
+      213: -1629399801057305843
+    second: Heart clone_51
+  - first:
+      213: -340254105601271514
+    second: Heart clone_52
+  - first:
+      213: 4922349736656367792
+    second: Heart clone_53
+  - first:
+      213: 4766668731415066981
+    second: Heart clone_54
+  - first:
+      213: -4967697200407230476
+    second: Heart clone_55
+  - first:
+      213: -5181434130270199805
+    second: Heart clone_56
+  - first:
+      213: -264065461953706446
+    second: Heart clone_57
+  - first:
+      213: 2252204313424086149
+    second: Heart clone_58
+  - first:
+      213: 3570530583910646843
+    second: Heart clone_59
+  - first:
+      213: -6052614659371043362
+    second: Heart clone_60
+  - first:
+      213: -3153874961263047349
+    second: Heart clone_61
+  - first:
+      213: 971098833501430736
+    second: Heart clone_62
+  - first:
+      213: 3153818299121694471
+    second: Heart clone_63
+  - first:
+      213: -7869183515210074217
+    second: Heart clone_64
+  - first:
+      213: -377906888898012125
+    second: Heart clone_65
+  - first:
+      213: 7103304735660443030
+    second: Heart clone_66
+  - first:
+      213: 5890324929486414100
+    second: Heart clone_67
+  - first:
+      213: -2376063011282660310
+    second: Heart clone_68
+  - first:
+      213: -2113775625981440372
+    second: Heart clone_69
+  - first:
+      213: -2237461132920917922
+    second: Heart clone_70
+  - first:
+      213: -1094350324915363785
+    second: Heart clone_71
+  - first:
+      213: 6105554434376142620
+    second: Heart clone_72
+  - first:
+      213: 6184264313056032602
+    second: Heart clone_73
+  - first:
+      213: 1309169056140198964
+    second: Heart clone_74
+  - first:
+      213: -285934367944011149
+    second: Heart clone_75
+  - first:
+      213: 4349246015056328667
+    second: Heart clone_76
+  - first:
+      213: 2964332318767259329
+    second: Heart clone_77
+  - first:
+      213: 3287224703198211100
+    second: Heart clone_78
+  - first:
+      213: 8924810508765452366
+    second: Heart clone_79
+  - first:
+      213: -8501466475150809430
+    second: Heart clone_80
+  - first:
+      213: 292024839835058488
+    second: Heart clone_81
+  - first:
+      213: 1447622920076717174
+    second: Heart clone_82
+  - first:
+      213: 5685582254694590308
+    second: Heart clone_83
+  - first:
+      213: 1941398593759420387
+    second: Heart clone_84
+  - first:
+      213: 5813833270591773099
+    second: Heart clone_85
+  - first:
+      213: -378346399405051558
+    second: Heart clone_86
+  - first:
+      213: -5487614752167222716
+    second: Heart clone_87
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 16
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Heart clone_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 128
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e98cc48cca9c8e470800000000000000
+      internalID: 8424204846928545950
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Heart clone_1
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 128
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4687df58ecdec7cf0800000000000000
+      internalID: -253066007772563356
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Heart clone_2
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 128
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cf3b8d2ae9b301360800000000000000
+      internalID: 7138270961905218556
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Heart clone_3
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 128
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 51fd49082539fa8b0800000000000000
+      internalID: -5138726667252605163
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Heart clone_4
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 128
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8f40b15e5d6b442e0800000000000000
+      internalID: -2142386492933470984
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Heart clone_5
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 96
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 105b0f94fe70bb7c0800000000000000
+      internalID: -4054638315197909759
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Heart clone_6
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 96
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6acdd1ab44fab50d0800000000000000
+      internalID: -3432957581224715098
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Heart clone_7
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 96
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6636098bcc3387900800000000000000
+      internalID: 682352297909445478
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Heart clone_8
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 96
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cfe24ad528dd31a00800000000000000
+      internalID: 726167516923309820
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Heart clone_9
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 96
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d50e6b83afefadfd0800000000000000
+      internalID: -2316258707681910691
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Heart clone_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eb1266c2a98e434f0800000000000000
+      internalID: -849798680798682690
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Heart clone_11
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: de01dd042ff5aac70800000000000000
+      internalID: 8983097900818829549
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Heart clone_12
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9b4cba75d1846ef30800000000000000
+      internalID: 4604446959895037113
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Heart clone_13
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4d638fca28f628840800000000000000
+      internalID: 5224861124741576404
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Heart clone_14
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 017e454a623727920800000000000000
+      internalID: 2986576112703039248
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Heart clone_15
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ce036fc8c9478b8a0800000000000000
+      internalID: -6289148663894232852
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Heart clone_16
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 96b4f264a28b51710800000000000000
+      internalID: 1663438129088908137
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Heart clone_17
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d058204a313a0eba0800000000000000
+      internalID: -6061665793689352947
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Heart clone_18
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1933293809fe7bf30800000000000000
+      internalID: 4591401749089235857
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Heart clone_19
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b53592c32bc28b700800000000000000
+      internalID: 556243698005398363
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Heart clone_20
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7bcd9c1977214eae0800000000000000
+      internalID: -1521070469388051273
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Heart clone_21
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 72d7e08b08367efb0800000000000000
+      internalID: -4618613488350233305
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

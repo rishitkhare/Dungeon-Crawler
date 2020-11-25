@@ -15,6 +15,8 @@ public class RoomTransitionMovement : MonoBehaviour
     public float smoothMinSpeed = 4.0f;
     public float cameraSpeed = 14f;
 
+    public float minimumFloatSpeed;
+
     public float roomSizeX = 18;
     public float roomSizeY = 10;
     GameObject player;
@@ -29,7 +31,7 @@ public class RoomTransitionMovement : MonoBehaviour
         roomTransitionTrigger = false;
     }
 
-    private void LateUpdate() {
+    private void Update() {
         SetGridIndexes();
 
         if(isSmoothMovement) {
@@ -38,7 +40,7 @@ public class RoomTransitionMovement : MonoBehaviour
         else {
             MoveCamera();
         }
-        SnapCameraToRoom(0.3f);
+        SnapCameraToRoom(0.1f);
 
         //lock player's motion if camera is moving (for the NES feel)
         if(CameraNeedsToMove()) {
@@ -117,6 +119,11 @@ public class RoomTransitionMovement : MonoBehaviour
 
         deltaTransform *= smoothMovementSpeed;
 
+        //prevents from going too slow
+        if (deltaTransform.magnitude < minimumFloatSpeed) {
+            deltaTransform.Normalize();
+            deltaTransform *= minimumFloatSpeed;
+        }
 
         transform.position += deltaTransform;
     }

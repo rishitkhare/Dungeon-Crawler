@@ -16,6 +16,7 @@ public class TopDownPlayerController : MonoBehaviour {
     public Vector2 input = Vector2.zero;
     public float knockback = 10f;
     public float knockbackTime = 0.1f;
+    public Vector2 input_real;
 
     private float knockbackTimer;
 
@@ -49,6 +50,8 @@ public class TopDownPlayerController : MonoBehaviour {
 
     void Update() {
         input = GetNormalizedInput();
+
+        input_real = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
         SetNewState();
         PerformStateOperations();

@@ -29,6 +29,7 @@ public class LightingFlicker : MonoBehaviour {
         lightComponent.pointLightOuterRadius = sinCalc.outerRadius;
         lightComponent.intensity = sinCalc.intensity;
         lightComponent.color = sinCalc.color;
+        //lightComponent. = sinCalc.sortingLayers;
     }
 
     // Update is called once per frame

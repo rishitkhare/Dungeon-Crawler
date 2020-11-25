@@ -18,7 +18,7 @@ public class RenderHealth : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        int heartStatus = playerHealth.HealthPts - (2 * heart_num);
+        int heartStatus = playerHealth.GetHealthPts() - (2 * heart_num);
 
         if(heartStatus > 1) {
             spriteRender.sprite = fullHeart;

@@ -8,34 +8,35 @@ public class Health : MonoBehaviour
 
     private TopDownPlayerController controller;
 
-    public int HealthPts { get; private set; }
+    [SerializeField]
+    private int healthPts;
 
     // Start is called before the first frame update
     void Awake()
     {
-        HealthPts = healthCapacity;
+        healthPts = healthCapacity;
         controller = gameObject.GetComponent<TopDownPlayerController>();
     }
 
     public void TakeDamage(int damageLoss) {
-        HealthPts -= Mathf.Abs(damageLoss);
+        healthPts -= Mathf.Abs(damageLoss);
 
-        if(HealthPts <= 0) {
-
+        if(healthPts < 0) {
+            healthPts = 0;
         }
     }
 
     public void GainHealth(int gainedHealth) {
-        HealthPts += Mathf.Abs(gainedHealth);
+        healthPts += Mathf.Abs(gainedHealth);
     }
 
     public int GetHealthPts() {
-        return HealthPts;
+        return healthPts;
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {
-        Debug.Log("TriggerEnter");
         if(collision.CompareTag("PlayerHurt")) {
+            Debug.Log("Damage Taken!");
             TakeDamage(1);
             controller.state = PlayerState.Knockback;
         }
