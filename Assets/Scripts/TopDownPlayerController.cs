@@ -6,7 +6,8 @@ public enum PlayerState {
     Walking,
     Attacking,
     Knockback,
-    Frozen
+    Frozen,
+    RoomTransition
 }
 
 [RequireComponent(typeof(SimpleRigidbody))]
@@ -16,9 +17,12 @@ public class TopDownPlayerController : MonoBehaviour {
     public Vector2 input = Vector2.zero;
     public float knockback = 10f;
     public float knockbackTime = 0.1f;
+    public float PostHitInvincibilityTime = 0.6f;
     public Vector2 input_real;
 
     private float knockbackTimer;
+    public bool isI_frame;
+    private float I_frameTimer;
 
     //float timer;
 
@@ -41,6 +45,7 @@ public class TopDownPlayerController : MonoBehaviour {
         state = PlayerState.Idle;
         rb = gameObject.GetComponent<SimpleRigidbody>();
         knockbackTimer = knockbackTime;
+        isI_frame = false;
 
         roomMovement = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<RoomTransitionMovement>();
 
@@ -52,6 +57,14 @@ public class TopDownPlayerController : MonoBehaviour {
         input = GetNormalizedInput();
 
         input_real = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+
+        if(isI_frame) {
+            I_frameTimer += Time.deltaTime;
+            if(I_frameTimer > PostHitInvincibilityTime) {
+                isI_frame = false;
+                I_frameTimer = 0;
+            }
+        }
 
         SetNewState();
         PerformStateOperations();
@@ -71,6 +84,7 @@ public class TopDownPlayerController : MonoBehaviour {
 
             case PlayerState.Knockback:
                 knockbackTimer -= Time.deltaTime;
+                isI_frame = true;
 
                 //pushes player back in the opposite direction they are facing.
                 rb.SetVelocity(-(knockback * 0.3f) * rb.GetDirection());
@@ -84,6 +98,10 @@ public class TopDownPlayerController : MonoBehaviour {
 
             case PlayerState.Frozen:
                 rb.SetVelocity(Vector2.zero);
+
+                break;
+            case PlayerState.RoomTransition:
+                rb.SetVelocity(rb.GetDirection() * knockback * 0.3f);
 
                 break;
 

@@ -12,11 +12,12 @@ public class PlayerAnimation : MonoBehaviour
     Animator anim;
 
     //Hashes
-    private int IdleHash = Animator.StringToHash("Idle");
-    private int WalkHash = Animator.StringToHash("Walk");
-    private int AttackHash = Animator.StringToHash("Attack");
-    private int DirectionXHash = Animator.StringToHash("DirectionX");
-    private int DirectionYHash = Animator.StringToHash("DirectionY");
+    private readonly int IdleHash = Animator.StringToHash("Idle");
+    private readonly int WalkHash = Animator.StringToHash("Walk");
+    private readonly int TintRedHash = Animator.StringToHash("Tint Red");
+    private readonly int I_FrameHash = Animator.StringToHash("Invincible");
+    private readonly int DirectionXHash = Animator.StringToHash("DirectionX");
+    private readonly int DirectionYHash = Animator.StringToHash("DirectionY");
 
     // Start is called before the first frame update
     void Start()
@@ -36,15 +37,20 @@ public class PlayerAnimation : MonoBehaviour
     void UpdateAnimatorState() {
         switch (controller.state) {
             case PlayerState.Idle:
-                anim.Play("Idle");
+                anim.Play(IdleHash);
                 break;
 
             case PlayerState.Walking:
-                anim.Play("Walk");
+                anim.Play(WalkHash);
                 break;
             case PlayerState.Frozen:
-                anim.Play("Idle");
+                anim.Play(IdleHash);
+                break;
+            case PlayerState.Knockback:
+                anim.Play(TintRedHash);
                 break;
         }
+
+        anim.SetBool(I_FrameHash, controller.isI_frame);
     }
 }

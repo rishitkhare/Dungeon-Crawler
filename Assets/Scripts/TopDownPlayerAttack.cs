@@ -10,7 +10,7 @@ public class TopDownPlayerAttack : MonoBehaviour
 
     public float attackEndLag = 0.4f;
     float attackTimer;
-    Boolean isAttacking;
+    bool isAttacking;
 
     SimpleRigidbody rb;
     TopDownPlayerController controller;
