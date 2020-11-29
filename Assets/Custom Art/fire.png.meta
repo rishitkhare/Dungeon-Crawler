@@ -1,55 +1,37 @@
 fileFormatVersion: 2
-guid: 3323207a6b5e84929b2cef6cf5ca039f
+guid: da1ff2662c067483183478625b39976f
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7915039318450174929
-    second: Down_Walk_0
+      213: 8334651344603559088
+    second: fire_0
   - first:
-      213: -1287833195095181929
-    second: Down_Walk_1
+      213: 9204931480678746970
+    second: fire_1
   - first:
-      213: 2044773645603635024
-    second: Down_Walk_2
+      213: -8359625512513901107
+    second: fire_2
   - first:
-      213: 8452630475730689003
-    second: Down_Walk_3
+      213: 7804807344221744696
+    second: fire_3
   - first:
-      213: -2504080763908808192
-    second: Down_Walk_4
+      213: -9112466456087325836
+    second: fire_4
   - first:
-      213: -6471038667149445700
-    second: Down_Walk_5
+      213: -8425653774166897640
+    second: fire_0
   - first:
-      213: 5868900813945579077
-    second: Down_Walk_6
+      213: -1925439106396943414
+    second: fire_1
   - first:
-      213: 6116390808420132767
-    second: Down_Walk_7
+      213: 6170512892453175260
+    second: fire_2
   - first:
-      213: -6298884631891110814
-    second: Down_Walk_0
+      213: 2776185859404747662
+    second: fire_3
   - first:
-      213: 6129111769761416336
-    second: Down_Walk_1
-  - first:
-      213: -490314650105007624
-    second: Down_Walk_2
-  - first:
-      213: -1245305211287773799
-    second: Down_Walk_3
-  - first:
-      213: -14089259386445884
-    second: Down_Walk_4
-  - first:
-      213: -7009315256833896510
-    second: Down_Walk_5
-  - first:
-      213: -173762783134510309
-    second: Down_Walk_6
-  - first:
-      213: 1891761266177173065
-    second: Down_Walk_7
+      213: 9121685459199938863
+    second: fire_4
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -161,169 +143,106 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Down_Walk_0
+      name: fire_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 108
-        width: 43
-        height: 54
+        y: 23
+        width: 16
+        height: 23
       alignment: 9
-      pivot: {x: 0.4883721, y: 0.5}
+      pivot: {x: 0.5, y: 0.4782609}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 26496fadccdd598a0800000000000000
-      internalID: -6298884631891110814
+      spriteID: 81c4a5e8880121b80800000000000000
+      internalID: -8425653774166897640
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Down_Walk_1
+      name: fire_1
       rect:
         serializedVersion: 2
-        x: 43
-        y: 108
-        width: 43
-        height: 54
+        x: 16
+        y: 23
+        width: 16
+        height: 23
       alignment: 9
-      pivot: {x: 0.4883721, y: 0.5}
+      pivot: {x: 0.5, y: 0.4782609}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0948b416eaafe0550800000000000000
-      internalID: 6129111769761416336
+      spriteID: acb809a85577745e0800000000000000
+      internalID: -1925439106396943414
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Down_Walk_2
+      name: fire_2
       rect:
         serializedVersion: 2
-        x: 86
-        y: 108
-        width: 43
-        height: 54
+        x: 32
+        y: 23
+        width: 16
+        height: 23
       alignment: 9
-      pivot: {x: 0.4883721, y: 0.5}
+      pivot: {x: 0.5, y: 0.4782609}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8f1325c6c6d0239f0800000000000000
-      internalID: -490314650105007624
+      spriteID: cdfb3ac68c012a550800000000000000
+      internalID: 6170512892453175260
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Down_Walk_3
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 54
-        width: 43
-        height: 54
-      alignment: 9
-      pivot: {x: 0.4883721, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 99ddf3c1289c7bee0800000000000000
-      internalID: -1245305211287773799
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Down_Walk_4
-      rect:
-        serializedVersion: 2
-        x: 43
-        y: 54
-        width: 43
-        height: 54
-      alignment: 9
-      pivot: {x: 0.4883721, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4cf5f1ba4e1fdcff0800000000000000
-      internalID: -14089259386445884
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Down_Walk_5
-      rect:
-        serializedVersion: 2
-        x: 86
-        y: 54
-        width: 43
-        height: 54
-      alignment: 9
-      pivot: {x: 0.4883721, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2cf80bd29e8e9be90800000000000000
-      internalID: -7009315256833896510
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Down_Walk_6
+      name: fire_3
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 43
-        height: 54
+        width: 16
+        height: 23
       alignment: 9
-      pivot: {x: 0.4883721, y: 0.5}
+      pivot: {x: 0.5, y: 0.4782609}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b13951c5baba69df0800000000000000
-      internalID: -173762783134510309
+      spriteID: e83584c845ef68620800000000000000
+      internalID: 2776185859404747662
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Down_Walk_7
+      name: fire_4
       rect:
         serializedVersion: 2
-        x: 43
+        x: 16
         y: 0
-        width: 43
-        height: 54
+        width: 16
+        height: 23
       alignment: 9
-      pivot: {x: 0.4883721, y: 0.5}
+      pivot: {x: 0.5, y: 0.4782609}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 946655e39d2e04a10800000000000000
-      internalID: 1891761266177173065
+      spriteID: f21557ca89cb69e70800000000000000
+      internalID: 9121685459199938863
       vertices: []
       indices: 
       edges: []

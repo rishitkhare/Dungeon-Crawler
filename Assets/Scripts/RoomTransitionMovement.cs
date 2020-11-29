@@ -12,13 +12,16 @@ public class RoomTransitionMovement : MonoBehaviour
     public int indexY;
     public bool isSmoothMovement = false;
     public float smoothMovementSpeed = 4.0f;
-    public float smoothMinSpeed = 4.0f;
+    public float smoothMinSpeed = 0.05f;
     public float cameraSpeed = 14f;
-
-    public float minimumFloatSpeed;
 
     public float roomSizeX = 18;
     public float roomSizeY = 10;
+
+
+    //used to ignore any other camera effects
+    private Vector3 previousPosition;
+
     GameObject player;
     SimpleRigidbody playerRb;
 
@@ -32,6 +35,7 @@ public class RoomTransitionMovement : MonoBehaviour
     }
 
     private void Update() {
+        transform.position = previousPosition;
         SetGridIndexes();
 
         if(isSmoothMovement) {
@@ -58,6 +62,8 @@ public class RoomTransitionMovement : MonoBehaviour
             }
             roomTransitionTrigger = false;
         }
+
+        previousPosition = transform.position;
     }
 
     private void SetGridIndexes() {
@@ -109,20 +115,20 @@ public class RoomTransitionMovement : MonoBehaviour
 
         // X
         if (transform.position.x != indexX * roomSizeX) {
-            deltaTransform += new Vector3((Xdiff + smoothMinSpeed) * Time.deltaTime, 0);
+            deltaTransform += new Vector3((Xdiff) * Time.deltaTime, 0);
         }
 
         // Y
         if (transform.position.y != indexY * roomSizeY) {
-            deltaTransform += new Vector3(0, (Ydiff +smoothMinSpeed) * Time.deltaTime);
+            deltaTransform += new Vector3(0, (Ydiff) * Time.deltaTime);
         }
 
         deltaTransform *= smoothMovementSpeed;
 
         //prevents from going too slow
-        if (deltaTransform.magnitude < minimumFloatSpeed) {
+        if (deltaTransform.magnitude < smoothMinSpeed) {
             deltaTransform.Normalize();
-            deltaTransform *= minimumFloatSpeed;
+            deltaTransform *= smoothMinSpeed;
         }
 
         transform.position += deltaTransform;

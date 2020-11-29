@@ -5,43 +5,30 @@ public class Health : MonoBehaviour
 {
     public int healthCapacity = 6;
     public BoxCollider2D hurtBox;
-    public bool isPlayer;
+    public string hurtTag;
 
-    private Animator playerAnimator;
-    private int numberOfHurtColliders;
-
-    private TopDownPlayerController controller;
-
-    [SerializeField]
-    private int healthPts;
+    protected int numberOfHurtColliders;
+    protected int healthPts;
 
     // Start is called before the first frame update
-    void Awake()
+    virtual public void Awake()
     {
         healthPts = healthCapacity;
-        controller = gameObject.GetComponent<TopDownPlayerController>();
-        if(isPlayer) {
-            playerAnimator = gameObject.GetComponent<Animator>();
-        }
         numberOfHurtColliders = 0;
     }
 
-    void Update() {
-        if(numberOfHurtColliders > 0) {
-            if(!controller.isI_frame) {
-                TakeDamage(1);
-            }
+    public void Update() {
+
+        if (numberOfHurtColliders > 0) {
+            TakeDamage(1);
         }
     }
 
-    public void TakeDamage(int damageLoss) {
-        if(!controller.isI_frame) {
-            controller.state = PlayerState.Knockback;
-            healthPts -= Mathf.Abs(damageLoss);
-
-            if(healthPts < 0) {
-                healthPts = 0;
-            }
+    virtual public void TakeDamage(int damageLoss) {
+        healthPts -= Mathf.Abs(damageLoss);
+        if (healthPts <= 0) {
+            //call death function
+            healthPts = 0;
         }
     }
 
@@ -54,13 +41,14 @@ public class Health : MonoBehaviour
     }
 
     void OnTriggerEnter2D(Collider2D collision) {
-        if (collision.CompareTag("PlayerHurt")) {
+        if (collision.CompareTag(hurtTag)) {
             numberOfHurtColliders++;
         }
     }
 
+
     void OnTriggerExit2D(Collider2D collision) {
-        if (collision.CompareTag("PlayerHurt")) {
+        if (collision.CompareTag(hurtTag)) {
             numberOfHurtColliders--;
         }
     }

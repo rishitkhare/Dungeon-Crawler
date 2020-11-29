@@ -39,7 +39,6 @@ public class PlayerAnimation : MonoBehaviour
             case PlayerState.Idle:
                 anim.Play(IdleHash);
                 break;
-
             case PlayerState.Walking:
                 anim.Play(WalkHash);
                 break;

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent (typeof(BoxCollider2D))]
+[RequireComponent(typeof(BoxCollider2D))]
 public class SimpleRigidbody : MonoBehaviour
 {
     Vector2 velocity;
