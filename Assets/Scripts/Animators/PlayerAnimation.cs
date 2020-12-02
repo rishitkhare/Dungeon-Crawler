@@ -46,6 +46,7 @@ public class PlayerAnimation : MonoBehaviour
                 anim.Play(IdleHash);
                 break;
             case PlayerState.Knockback:
+                anim.Play(IdleHash);
                 anim.Play(TintRedHash);
                 break;
         }

@@ -14,13 +14,15 @@ public enum PlayerState {
 [RequireComponent(typeof(Health))]
 public class TopDownPlayerController : MonoBehaviour {
     public float speed = 4f;
-    public Vector2 input = Vector2.zero;
     public float knockback = 10f;
     public float knockbackTime = 0.1f;
     public float PostHitInvincibilityTime = 0.6f;
-    public Vector2 input_real;
 
     private float knockbackTimer;
+    private Vector2 knockbackDirection;
+
+    private Vector2 input = Vector2.zero;
+
     public bool isI_frame;
     private float I_frameTimer;
 
@@ -40,6 +42,11 @@ public class TopDownPlayerController : MonoBehaviour {
         state = PlayerState.Idle;
     }
 
+    public void KnockPlayerBack() {
+        state = PlayerState.Knockback;
+        knockbackDirection = rb.GetTrueDirection();
+    }
+
     void Start() {
         //timer = 0f;
         state = PlayerState.Idle;
@@ -56,18 +63,20 @@ public class TopDownPlayerController : MonoBehaviour {
     void Update() {
         input = GetNormalizedInput();
 
-        input_real = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        CheckIFrames();
 
-        if(isI_frame) {
+        SetNewState();
+        PerformStateOperations();
+    }
+
+    private void CheckIFrames() {
+        if (isI_frame) {
             I_frameTimer += Time.deltaTime;
-            if(I_frameTimer > PostHitInvincibilityTime) {
+            if (I_frameTimer > PostHitInvincibilityTime) {
                 isI_frame = false;
                 I_frameTimer = 0;
             }
         }
-
-        SetNewState();
-        PerformStateOperations();
     }
 
     private void PerformStateOperations() {
@@ -87,7 +96,7 @@ public class TopDownPlayerController : MonoBehaviour {
                 isI_frame = true;
 
                 //pushes player back in the opposite direction they are facing.
-                rb.SetVelocity(-(knockback * 0.3f) * rb.GetDirection());
+                rb.SetVelocity(-(knockback * 0.3f) * knockbackDirection);
 
                 break;
 

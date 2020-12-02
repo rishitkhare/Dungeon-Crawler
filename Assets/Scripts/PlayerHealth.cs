@@ -26,7 +26,7 @@ public class PlayerHealth : Health
 
         if (!controller.isI_frame) {
             healthPts -= Mathf.Abs(damageLoss);
-            controller.state = PlayerState.Knockback;
+            controller.KnockPlayerBack();
             shaker.ShakeScreen(damagedScreenShakeFrames, damagedScreenShakeIntensity);
         }
 

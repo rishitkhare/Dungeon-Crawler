@@ -8,13 +8,17 @@ public class Health : MonoBehaviour
     public string hurtTag;
 
     protected int numberOfHurtColliders;
+    protected Vector3 inflictorPosition;
     protected int healthPts;
+
+    private SkeletonController skellycontroller;
 
     // Start is called before the first frame update
     virtual public void Awake()
     {
         healthPts = healthCapacity;
         numberOfHurtColliders = 0;
+        skellycontroller = gameObject.GetComponent<SkeletonController>();
     }
 
     public void Update() {
@@ -24,8 +28,11 @@ public class Health : MonoBehaviour
         }
     }
 
+    //only applies to enemies
     virtual public void TakeDamage(int damageLoss) {
         healthPts -= Mathf.Abs(damageLoss);
+        skellycontroller.Knockback(inflictorPosition);
+
         if (healthPts <= 0) {
             //call death function
             healthPts = 0;
@@ -40,9 +47,11 @@ public class Health : MonoBehaviour
         return healthPts;
     }
 
+    //TODO: refactor collision detection out of the Health Class
     void OnTriggerEnter2D(Collider2D collision) {
         if (collision.CompareTag(hurtTag)) {
             numberOfHurtColliders++;
+            inflictorPosition = collision.gameObject.transform.position;
         }
     }
 

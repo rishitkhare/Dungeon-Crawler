@@ -5,15 +5,10 @@ using UnityEngine;
 [RequireComponent(typeof(BoxCollider2D))]
 public class SimpleRigidbody : MonoBehaviour
 {
-    Vector2 velocity;
+    private Vector2 velocity;
     private Vector2 direction = Vector2.down;
 
     public LayerMask collidableLayer;
-
-    bool isLockMovement = false;
-    bool isLockDirection = false;
-    float lockMovementTimer = 0f;
-    float lockDirectionTimer = 0f;
 
     BoxCollider2D myCollider;
 
@@ -24,85 +19,39 @@ public class SimpleRigidbody : MonoBehaviour
 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        LockMoveTimerUpdate();
-        LockDirectionTimerUpdate();
-    }
-
     void FixedUpdate() {
-        if(!isLockMovement) {
-            Move();
-        }
+        Move();
     }
-
 
 
     /// DIRECTION MUTATORS AND ACCESSORS
 
-
     public void SetDirection(Vector2 direction) {
-        if(!isLockDirection) {
-            this.direction = direction;
-        }
+        this.direction = direction;
     }
+
     public void SetDirectionX(float x) {
-        if(!isLockDirection) {
-            direction.x = x;
-        }
+        direction.x = x;
     }
     public void SetDirectionY(float y) {
-        if(!isLockDirection) {
-            direction.y = y;
-        }
+        direction.y = y;
     }
-
 
     public Vector2 GetDirection() { return direction; }
 
-
-
-
-
-    void LockMoveTimerUpdate() {
-        if (lockMovementTimer <= 0f) {
-            isLockMovement = false;
-            lockMovementTimer = 0f;
+    public Vector2 GetTrueDirection() {
+        if(velocity.magnitude != 0) {
+            return velocity.normalized;
         }
         else {
-            isLockMovement = true;
-            lockMovementTimer -= Time.deltaTime;
+            return direction;
         }
     }
 
-    void LockDirectionTimerUpdate() {
-        if (lockDirectionTimer <= 0f) {
-            isLockDirection = false;
-            lockDirectionTimer = 0f;
-        }
-        else {
-            isLockDirection = true;
-            lockDirectionTimer -= Time.deltaTime;
-        }
-    }
+    //Velocity mutator
 
     public void SetVelocity(Vector2 velocity) {
         this.velocity = velocity;
-    }
-
-    public void LockMovement(float time) {
-        lockMovementTimer = time;
-    }
-    public void LockMovement() {
-        LockMovement(0.05f);
-    }
-
-    public void LockDirection(float time) {
-        lockDirectionTimer = time;
-    }
-    public void LockDirection() {
-        LockDirection(0.05f);
     }
 
     private void Move() {

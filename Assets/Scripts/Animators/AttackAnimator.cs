@@ -38,11 +38,7 @@ public class AttackAnimator : MonoBehaviour
 
         Vector2 direction = ((AttackEventArgs)e).direction;
 
-        //positioning
-        transform.localPosition = playerHitBox.offset;
-        transform.localPosition += (Vector3) direction;
-
-        //rotation of sprite (assumes the picture is facing up)
+        //rotation of sprite (assumes the picture is facing down)
         float angle = Vector2.SignedAngle(Vector2.up, direction);
         transform.eulerAngles = new Vector3(0, 0, angle);
 

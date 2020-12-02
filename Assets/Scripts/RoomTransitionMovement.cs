@@ -44,12 +44,10 @@ public class RoomTransitionMovement : MonoBehaviour
         else {
             MoveCamera();
         }
-        SnapCameraToRoom(0.1f);
+        SnapCameraToRoom(smoothMinSpeed);
 
         //lock player's motion if camera is moving (for the NES feel)
         if(CameraNeedsToMove()) {
-            
-            playerRb.LockMovement();
 
             if(!roomTransitionTrigger) {
                 OnRoomTransitionEnter?.Invoke(this, EventArgs.Empty);
@@ -58,6 +56,7 @@ public class RoomTransitionMovement : MonoBehaviour
         }
         else {
             if(roomTransitionTrigger) {
+                //invoke this only once with trigger
                 OnRoomTransitionExit?.Invoke(this, EventArgs.Empty);
             }
             roomTransitionTrigger = false;
