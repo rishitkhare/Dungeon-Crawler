@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider2D))]
 public class SimpleRigidbody : MonoBehaviour
@@ -8,6 +6,7 @@ public class SimpleRigidbody : MonoBehaviour
     private Vector2 velocity;
     private Vector2 direction = Vector2.down;
 
+    public bool snapToGrid = false;
     public LayerMask collidableLayer;
 
     BoxCollider2D myCollider;
@@ -63,8 +62,12 @@ public class SimpleRigidbody : MonoBehaviour
             deltaPosition.y = RaycastYCollision(velocity.y * Time.fixedDeltaTime);
         }
 
-        if(deltaPosition.magnitude > 0.05f) {
+        if(deltaPosition.magnitude > 0.03f) {
             transform.position += (Vector3) deltaPosition;
+        }
+
+        if (deltaPosition.Equals(Vector2.zero) && snapToGrid) {
+            transform.position = new Vector3(Mathf.RoundToInt(transform.position.x), Mathf.RoundToInt(transform.position.y), transform.position.z);
         }
     }
 
@@ -104,9 +107,9 @@ public class SimpleRigidbody : MonoBehaviour
         colliderCenterPos.x += myCollider.offset.x;
         colliderCenterPos.y += myCollider.offset.y;
 
-        //start ray on edge of collider (depending on right or left)
+        //start ray on edge of collider (depending on up or down)
         Vector2 origin = colliderCenterPos;
-        origin.y += Mathf.Sign(deltaY) * 0.5f * myCollider.size.x;
+        origin.y += Mathf.Sign(deltaY) * 0.5f * myCollider.size.y;
 
         //cast 3 rays for detection
         RaycastHit2D hit1 = Physics2D.Raycast(origin, Vector2.up, deltaY, collidableLayer);

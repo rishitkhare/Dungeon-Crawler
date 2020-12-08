@@ -50,6 +50,9 @@ TextureImporter:
   - first:
       213: -215946290037731501
     second: Up_Walk_7
+  - first:
+      213: -8694933541096390129
+    second: Up_Walk_8
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -169,7 +172,7 @@ TextureImporter:
         width: 43
         height: 54
       alignment: 9
-      pivot: {x: 0.4883721, y: 0.5}
+      pivot: {x: 0.4883721, y: 0.4814815}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -190,7 +193,7 @@ TextureImporter:
         width: 43
         height: 54
       alignment: 9
-      pivot: {x: 0.4883721, y: 0.5}
+      pivot: {x: 0.4883721, y: 0.4814815}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -211,7 +214,7 @@ TextureImporter:
         width: 43
         height: 54
       alignment: 9
-      pivot: {x: 0.4883721, y: 0.5}
+      pivot: {x: 0.4883721, y: 0.4814815}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -232,7 +235,7 @@ TextureImporter:
         width: 43
         height: 54
       alignment: 9
-      pivot: {x: 0.4883721, y: 0.5}
+      pivot: {x: 0.4883721, y: 0.4814815}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -253,7 +256,7 @@ TextureImporter:
         width: 43
         height: 54
       alignment: 9
-      pivot: {x: 0.4883721, y: 0.5}
+      pivot: {x: 0.4883721, y: 0.4814815}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -274,7 +277,7 @@ TextureImporter:
         width: 43
         height: 54
       alignment: 9
-      pivot: {x: 0.4883721, y: 0.5}
+      pivot: {x: 0.4883721, y: 0.4814815}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -295,7 +298,7 @@ TextureImporter:
         width: 43
         height: 54
       alignment: 9
-      pivot: {x: 0.4883721, y: 0.5}
+      pivot: {x: 0.4883721, y: 0.4814815}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -316,7 +319,7 @@ TextureImporter:
         width: 43
         height: 54
       alignment: 9
-      pivot: {x: 0.4883721, y: 0.5}
+      pivot: {x: 0.4883721, y: 0.4814815}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -324,6 +327,27 @@ TextureImporter:
       bones: []
       spriteID: 35fccbb4efdc00df0800000000000000
       internalID: -215946290037731501
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Up_Walk_8
+      rect:
+        serializedVersion: 2
+        x: 86
+        y: 0
+        width: 43
+        height: 54
+      alignment: 9
+      pivot: {x: 0.4883721, y: 0.4814815}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f0202591304655780800000000000000
+      internalID: -8694933541096390129
       vertices: []
       indices: 
       edges: []

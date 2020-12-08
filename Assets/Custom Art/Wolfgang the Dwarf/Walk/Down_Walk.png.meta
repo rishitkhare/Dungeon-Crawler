@@ -169,7 +169,7 @@ TextureImporter:
         width: 43
         height: 54
       alignment: 9
-      pivot: {x: 0.4883721, y: 0.5}
+      pivot: {x: 0.4883721, y: 0.4814815}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -190,7 +190,7 @@ TextureImporter:
         width: 43
         height: 54
       alignment: 9
-      pivot: {x: 0.4883721, y: 0.5}
+      pivot: {x: 0.4883721, y: 0.4814815}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -211,7 +211,7 @@ TextureImporter:
         width: 43
         height: 54
       alignment: 9
-      pivot: {x: 0.4883721, y: 0.5}
+      pivot: {x: 0.4883721, y: 0.4814815}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -232,7 +232,7 @@ TextureImporter:
         width: 43
         height: 54
       alignment: 9
-      pivot: {x: 0.4883721, y: 0.5}
+      pivot: {x: 0.4883721, y: 0.4814815}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -253,7 +253,7 @@ TextureImporter:
         width: 43
         height: 54
       alignment: 9
-      pivot: {x: 0.4883721, y: 0.5}
+      pivot: {x: 0.4883721, y: 0.4814815}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -274,7 +274,7 @@ TextureImporter:
         width: 43
         height: 54
       alignment: 9
-      pivot: {x: 0.4883721, y: 0.5}
+      pivot: {x: 0.4883721, y: 0.4814815}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -295,7 +295,7 @@ TextureImporter:
         width: 43
         height: 54
       alignment: 9
-      pivot: {x: 0.4883721, y: 0.5}
+      pivot: {x: 0.4883721, y: 0.4814815}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -316,7 +316,7 @@ TextureImporter:
         width: 43
         height: 54
       alignment: 9
-      pivot: {x: 0.4883721, y: 0.5}
+      pivot: {x: 0.4883721, y: 0.4814815}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
