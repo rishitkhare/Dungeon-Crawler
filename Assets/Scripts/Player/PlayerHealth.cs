@@ -5,8 +5,6 @@ using UnityEngine;
 public class PlayerHealth : Health
 {
     TopDownPlayerController controller;
-    Animator playerAnimator;
-    public ScreenShake shaker;
     public int damagedScreenShakeFrames = 40;
     public float damagedScreenShakeIntensity = 2f;
 
@@ -17,7 +15,6 @@ public class PlayerHealth : Health
         healthPts = healthCapacity;
         numberOfHurtColliders = 0;
 
-        playerAnimator = gameObject.GetComponent<Animator>();
         controller = gameObject.GetComponent<TopDownPlayerController>();
     }
 
@@ -27,7 +24,7 @@ public class PlayerHealth : Health
         if (!controller.isI_frame) {
             healthPts -= Mathf.Abs(damageLoss);
             controller.KnockPlayerBack();
-            shaker.ShakeScreen(damagedScreenShakeFrames, damagedScreenShakeIntensity);
+            ScreenShake.screenShaker.ShakeScreen(damagedScreenShakeFrames, damagedScreenShakeIntensity);
         }
 
         if (healthPts <= 0) {

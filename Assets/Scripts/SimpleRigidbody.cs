@@ -4,6 +4,7 @@
 public class SimpleRigidbody : MonoBehaviour
 {
     private Vector2 velocity;
+    [SerializeField]
     private Vector2 direction = Vector2.down;
 
     public bool snapToGrid = false;
@@ -131,12 +132,12 @@ public class SimpleRigidbody : MonoBehaviour
         }
     }
 
-    private void DebugRayHits(RaycastHit2D hit, Vector2 origin, Vector2 direction, float mag) {
+    private void DebugRayHits(RaycastHit2D hit, Vector2 origin, Vector2 direction, float magnitude) {
         if(hit) {
-            Debug.DrawRay(origin, Mathf.Sign(mag) * hit.distance * direction, Color.green);
+            Debug.DrawRay(origin, Mathf.Sign(magnitude) * hit.distance * direction, Color.green);
         }
         else {
-            Debug.DrawRay(origin, mag * direction, Color.red);
+            Debug.DrawRay(origin, magnitude * direction, Color.red);
         }
     }
 }

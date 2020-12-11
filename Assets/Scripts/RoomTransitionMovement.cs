@@ -6,10 +6,11 @@ public class RoomTransitionMovement : MonoBehaviour
     public event EventHandler OnRoomTransitionEnter;
     public event EventHandler OnRoomTransitionExit;
 
+    public static RoomTransitionMovement RoomSystem;
+
     bool roomTransitionTrigger;
 
-    public int indexX;
-    public int indexY;
+    public Vector2Int roomIndexes;
     public bool isSmoothMovement = false;
     public float smoothMovementSpeed = 4.0f;
     public float smoothMinSpeed = 0.05f;
@@ -26,11 +27,17 @@ public class RoomTransitionMovement : MonoBehaviour
 
     GameObject player;
 
+    void Awake() {
+        if(RoomSystem = null) {
+            throw new System.ArgumentException("doubled instantiation of RoomTransitionMovement (singleton)");
+        }
+        RoomSystem = this;
+    }
+
     void Start() {
         player = GameObject.FindGameObjectWithTag("Player");
         SetGridIndexes();
         previousPosition = transform.position;
-
         roomTransitionTrigger = false;
     }
 
@@ -68,19 +75,25 @@ public class RoomTransitionMovement : MonoBehaviour
     }
 
     private void SetGridIndexes() {
+        roomIndexes = RoomIndex(player.transform.position);
+    }
+
+    public static Vector2Int RoomIndex(Vector2 position) {
         // calculate grid
-        indexX = (int)Mathf.Floor((player.transform.position.x - cameraOffsetX + (roomSizeX / 2f)) / roomSizeX);
-        indexY = (int)Mathf.Floor((player.transform.position.y - cameraOffsetY + (roomSizeY / 2f)) / roomSizeY);
+        return new Vector2Int {
+            x = (int)Mathf.Floor((position.x - RoomSystem.cameraOffsetX + (RoomSystem.roomSizeX / 2f)) / RoomSystem.roomSizeX),
+            y = (int)Mathf.Floor((position.y - RoomSystem.cameraOffsetY + (RoomSystem.roomSizeY / 2f)) / RoomSystem.roomSizeY)
+        };
     }
 
     private void SnapCameraToRoom(float leeway) {
         //snaps camera to correct position if slightly off to prevent overshooting the movement
-        if (Mathf.Abs(transform.position.x - (indexX * roomSizeX + cameraOffsetX)) < leeway) {
-            transform.position = new Vector3(indexX * roomSizeX + cameraOffsetX, transform.position.y, -10);
+        if (Mathf.Abs(transform.position.x - (roomIndexes.x * roomSizeX + cameraOffsetX)) < leeway) {
+            transform.position = new Vector3(roomIndexes.x * roomSizeX + cameraOffsetX, transform.position.y, -10);
         }
 
-        if (Mathf.Abs(transform.position.y - (indexY * roomSizeY + cameraOffsetY)) < leeway) {
-            transform.position = new Vector3(transform.position.x, indexY * roomSizeY + cameraOffsetY, -10);
+        if (Mathf.Abs(transform.position.y - (roomIndexes.y * roomSizeY + cameraOffsetY)) < leeway) {
+            transform.position = new Vector3(transform.position.x, roomIndexes.y * roomSizeY + cameraOffsetY, -10);
         }
     }
 
@@ -90,18 +103,18 @@ public class RoomTransitionMovement : MonoBehaviour
 
 
         // X
-        if (transform.position.x > indexX * roomSizeX + cameraOffsetX) {
+        if (transform.position.x > roomIndexes.x * roomSizeX + cameraOffsetX) {
             deltaTransform += new Vector3(-cameraSpeed * Time.deltaTime, 0);
         }
-        else if (transform.position.x < indexX * roomSizeX + cameraOffsetX) {
+        else if (transform.position.x < roomIndexes.x * roomSizeX + cameraOffsetX) {
             deltaTransform += new Vector3(cameraSpeed * Time.deltaTime, 0);
         }
 
         // Y
-        if (transform.position.y > indexY * roomSizeY + cameraOffsetY) {
+        if (transform.position.y > roomIndexes.y * roomSizeY + cameraOffsetY) {
             deltaTransform += new Vector3(0, -cameraSpeed * Time.deltaTime);
         }
-        else if (transform.position.y < indexY * roomSizeY + cameraOffsetY) {
+        else if (transform.position.y < roomIndexes.y * roomSizeY + cameraOffsetY) {
             deltaTransform += new Vector3(0, cameraSpeed * Time.deltaTime);
         }
 
@@ -111,16 +124,16 @@ public class RoomTransitionMovement : MonoBehaviour
     private void MoveCameraSmooth() {
         // move camera if necessary
         Vector3 deltaTransform = new Vector3(0, 0);
-        float Xdiff = indexX * roomSizeX + cameraOffsetX - transform.position.x;
-        float Ydiff = indexY * roomSizeY + cameraOffsetY - transform.position.y;
+        float Xdiff = roomIndexes.x * roomSizeX + cameraOffsetX - transform.position.x;
+        float Ydiff = roomIndexes.y * roomSizeY + cameraOffsetY - transform.position.y;
 
         // X
-        if (transform.position.x != indexX * roomSizeX + cameraOffsetX) {
+        if (transform.position.x != roomIndexes.x * roomSizeX + cameraOffsetX) {
             deltaTransform += new Vector3((Xdiff) * Time.deltaTime, 0);
         }
 
         // Y
-        if (transform.position.y != indexY * roomSizeY + cameraOffsetY) {
+        if (transform.position.y != roomIndexes.y * roomSizeY + cameraOffsetY) {
             deltaTransform += new Vector3(0, (Ydiff) * Time.deltaTime);
         }
 
@@ -136,6 +149,6 @@ public class RoomTransitionMovement : MonoBehaviour
     }
 
     private bool CameraNeedsToMove() {
-        return ! ( (transform.position.x == indexX * roomSizeX + cameraOffsetX) && (transform.position.y == indexY * roomSizeY + cameraOffsetY));
+        return ! ( (transform.position.x == roomIndexes.x * roomSizeX + cameraOffsetX) && (transform.position.y == roomIndexes.y * roomSizeY + cameraOffsetY));
     }
 }

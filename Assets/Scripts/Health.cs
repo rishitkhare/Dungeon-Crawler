@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Health : MonoBehaviour
 {
@@ -30,6 +29,7 @@ public class Health : MonoBehaviour
 
     //only applies to enemies
     virtual public void TakeDamage(int damageLoss) {
+        ScreenShake.screenShaker.ShakeScreen(3, 2f);
         healthPts -= Mathf.Abs(damageLoss);
         skellycontroller.Knockback(inflictorPosition);
 
@@ -48,6 +48,7 @@ public class Health : MonoBehaviour
     }
 
     //TODO: refactor collision detection out of the Health Class
+    //honestly I need to refactor this whole class it's a mess
     void OnTriggerEnter2D(Collider2D collision) {
         if (collision.CompareTag(hurtTag)) {
             numberOfHurtColliders++;

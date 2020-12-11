@@ -20,8 +20,7 @@ public class SkeletonController : MonoBehaviour
     public float knockbackTime = 0.1f;
 
     private Vector2 knockbackDirection;
-    private float roomXindex;
-    private float roomYindex;
+    private Vector2Int myRoomIndex;
 
     private float knockbackTimer;
 
@@ -38,13 +37,17 @@ public class SkeletonController : MonoBehaviour
         ai = gameObject.GetComponent<EnemyAI>();
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         state = EnemyState.Idle;
+
+        myRoomIndex = RoomTransitionMovement.RoomIndex(transform.position);
     }
 
     // Update is called once per frame
     void Update()
     {
-        SetNewState();
-        PerformStateOperations();
+        if(RoomTransitionMovement.RoomSystem.roomIndexes == myRoomIndex) {
+            SetNewState();
+            PerformStateOperations();
+        }
     }
 
     private void PerformStateOperations() {
@@ -57,7 +60,9 @@ public class SkeletonController : MonoBehaviour
             case EnemyState.Walking:
                 Vector2 direction = ai.GetDirection();
                 rb.SetVelocity(direction * speed);
-                spriteRenderer.flipX = direction.x < 0;
+                if(direction.x != 0f) {
+                    spriteRenderer.flipX = direction.x < 0;
+                }
 
                 break;
 
