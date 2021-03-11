@@ -3,7 +3,7 @@
 public class Health : MonoBehaviour
 {
     public int healthCapacity = 6;
-    public BoxCollider2D hurtBox;
+    //public BoxCollider2D hurtBox;
     public string hurtTag;
 
     protected int numberOfHurtColliders;

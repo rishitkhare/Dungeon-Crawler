@@ -8,9 +8,8 @@ public class TopDownPlayerAttack : MonoBehaviour
 
     public event EventHandler PlayerAttack;
 
-    public float attackEndLag = 0.4f;
+    public float attackEndLag = 0.3f;
     float attackTimer;
-    bool isAttacking;
 
     SimpleRigidbody rb;
     TopDownPlayerController controller;
@@ -21,7 +20,6 @@ public class TopDownPlayerAttack : MonoBehaviour
         rb = gameObject.GetComponent<SimpleRigidbody>();
         controller = gameObject.GetComponent<TopDownPlayerController>();
         anim = gameObject.GetComponent<Animator>();
-        isAttacking = false;
     }
 
     // Update is called once per frame
@@ -32,23 +30,22 @@ public class TopDownPlayerAttack : MonoBehaviour
             attackTimer = attackEndLag;
         }
 
-        if(isAttacking) {
-            attackTimer -= Time.deltaTime;
+        if (controller.state == PlayerState.Attacking) {
             AttackEndLag();
         }
     }
 
     void Attack() {
         controller.state = PlayerState.Attacking;
-        isAttacking = true;
         anim.SetTrigger("Attack");
         PlayerAttack?.Invoke(this, new AttackEventArgs(rb.GetDirection(), attackEndLag));
     }
 
     void AttackEndLag() {
-        if(attackTimer <= 0f) {
+        attackTimer -= Time.deltaTime;
+
+        if (attackTimer <= 0f) {
             controller.state = PlayerState.Idle;
-            isAttacking = false;
         }
     }
 }

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 public class EnemyAI : MonoBehaviour
 {
 
-    public Transform playerTransform;
+    Transform playerTransform;
     public float maxWaitTime = 5f;
     public EnemyState stateAfterKnockback;
     public LayerMask collidableLayer;
@@ -19,7 +19,11 @@ public class EnemyAI : MonoBehaviour
     void Awake() {
         controller = gameObject.GetComponent<SkeletonController>();
         hitbox = gameObject.GetComponent<BoxCollider2D>();
-        transform.position = new Vector3((int) transform.position.x, (int) transform.position.y, transform.position.z);
+        playerTransform = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+    }
+
+    void Start() {
+        transform.position = new Vector3((int)transform.position.x, (int)transform.position.y, transform.position.z);
         previousNodes = new List<Vector2Int>();
         currentNode = new Vector2Int(Mathf.RoundToInt(transform.position.x), Mathf.RoundToInt(transform.position.y));
         previousNodes.Add(currentNode);
@@ -42,6 +46,11 @@ public class EnemyAI : MonoBehaviour
         if(controller.state != EnemyState.Knockback) {
             IdleClock -= Time.deltaTime;
         }
+    }
+
+    public void AfterKnockback() {
+        currentNode = new Vector2Int(Mathf.RoundToInt(transform.position.x), Mathf.RoundToInt(transform.position.y));
+        previousNodes.Clear();
     }
 
     //Chooses which direction the enemy will go in based on pathfinding algorithm

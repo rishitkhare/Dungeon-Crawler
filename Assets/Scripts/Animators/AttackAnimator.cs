@@ -11,41 +11,33 @@ public class AttackAnimator : MonoBehaviour
 {
 
     TopDownPlayerAttack playerAttackComponent;
-    BoxCollider2D playerHitBox;
-    Animator animator;
-
-    public float attackRange = 1f;
+    Animator hitboxAnimator;
 
     public string attackParameterName;
-    public string playerAttackParameter;
     int attackParameterHash;
-    int playerAttackParameterHash;
 
     void Awake()
     {
         playerAttackComponent = transform.parent.GetComponentInParent<TopDownPlayerAttack>();
-
-        playerHitBox = transform.parent.GetComponentInParent<BoxCollider2D>();
-        animator = gameObject.GetComponent<Animator>();
+        hitboxAnimator = gameObject.GetComponent<Animator>();
 
         attackParameterHash = Animator.StringToHash(attackParameterName);
-        playerAttackParameterHash = Animator.StringToHash(playerAttackParameter);
 
-       playerAttackComponent.PlayerAttack += SetAnimation;
+        playerAttackComponent.PlayerAttack += SetAnimation;
     }
 
     void SetAnimation(object sender, EventArgs e) {
 
         Vector2 direction = ((AttackEventArgs)e).direction;
 
-        //rotation of sprite (assumes the picture is facing down)
+        //rotation of sprite (assumes that angle = 0 is facing up)
         float angle = Vector2.SignedAngle(Vector2.up, direction);
         transform.eulerAngles = new Vector3(0, 0, angle);
 
-        SetAnimationTrigger();
+        ActivateHitboxAnimation();
     }
 
-    void SetAnimationTrigger() {
-        animator.SetTrigger(attackParameterHash);
+    void ActivateHitboxAnimation() {
+        hitboxAnimator.SetTrigger(attackParameterHash);
     }
 }
