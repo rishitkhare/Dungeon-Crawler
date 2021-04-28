@@ -48,16 +48,22 @@ public class LightingFlicker : MonoBehaviour {
     }
 
     private void FlickerLights() {
+
+        lightComponent.pointLightInnerRadius = sinCalc.innerRadius + sinCalc.GetSinVariation();
+        lightComponent.pointLightOuterRadius = sinCalc.outerRadius + sinCalc.GetSinVariation();
+        /*
         Vector2 newPosition = transform.position;
 
+        
         if (isVerticalFlicker) {
             newPosition.y = initialPosition + sinCalc.GetSinVariation();
         }
         else {
             newPosition.x = initialPosition + sinCalc.GetSinVariation();
         }
-
+        
         transform.position = newPosition;
+        */
     }
 
 

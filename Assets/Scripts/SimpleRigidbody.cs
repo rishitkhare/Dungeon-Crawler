@@ -48,6 +48,10 @@ public class SimpleRigidbody : MonoBehaviour
         }
     }
 
+    public Vector2 GetVelocity() {
+        return velocity;
+    }
+
     //Velocity mutator
 
     public void SetVelocity(Vector2 velocity) {

@@ -82,7 +82,6 @@ public class SkeletonController : MonoBehaviour
                 if (knockbackTimer <= 0f) {
                     state = ai.stateAfterKnockback;
                     knockbackTimer = knockbackTime;
-                    ai.AfterKnockback();
                 }
 
                 break;
