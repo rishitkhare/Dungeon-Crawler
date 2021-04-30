@@ -43,10 +43,10 @@ public class TopDownPlayerController : MonoBehaviour {
         state = PlayerState.Idle;
     }
 
-    public void KnockPlayerBack() {
+    public void KnockPlayerBack(Vector3 inflictorPosition) {
         state = PlayerState.Knockback;
-        knockbackDirection = rb.GetTrueDirection();
-        rb.SetVelocity(-(knockback) * knockbackDirection);
+        knockbackDirection = (transform.position - inflictorPosition).normalized;
+        rb.SetVelocity(knockback * knockbackDirection);
     }
 
     void Start() {

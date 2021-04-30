@@ -63,15 +63,20 @@ public class SimpleRigidbody : MonoBehaviour
         if(velocity.x != 0) {
             deltaPosition.x = RaycastXCollision(velocity.x * Time.fixedDeltaTime);
         }
+
+        if(Mathf.Abs(deltaPosition.x) > 0.01f) {
+            transform.position += new Vector3(deltaPosition.x, 0, 0);
+        }
+
         if(velocity.y != 0) {
             deltaPosition.y = RaycastYCollision(velocity.y * Time.fixedDeltaTime);
         }
 
-        if(deltaPosition.magnitude > 0.03f) {
-            transform.position += (Vector3) deltaPosition;
+        if(Mathf.Abs(deltaPosition.y) > 0.01f) {
+            transform.position += new Vector3(0, deltaPosition.y, 0);
         }
 
-        if (deltaPosition.Equals(Vector2.zero) && snapToGrid) {
+        if (snapToGrid && deltaPosition.Equals(Vector2.zero)) {
             transform.position = new Vector3(Mathf.RoundToInt(transform.position.x), Mathf.RoundToInt(transform.position.y), transform.position.z);
         }
     }

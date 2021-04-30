@@ -17,6 +17,7 @@ public class SkeletonController : MonoBehaviour
     public EnemyState state {get; set; }
     public float speed = 2f;
     public float knockback = 10f;
+    public float knockbackDecel = 0.88f;
     public float knockbackTime = 0.1f;
 
     private Vector2 knockbackDirection;
@@ -25,9 +26,9 @@ public class SkeletonController : MonoBehaviour
     private float knockbackTimer;
 
     public void Knockback(Vector3 damagerPosition) {
-        knockbackDirection = transform.position - damagerPosition;
-        knockbackDirection.Normalize();
+        knockbackDirection = (transform.position - damagerPosition).normalized;
         state = EnemyState.Knockback;
+        rb.SetVelocity(knockbackDirection * knockback);
     }
 
     // Start is called before the first frame update
@@ -44,10 +45,16 @@ public class SkeletonController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(RoomTransitionMovement.RoomSystem.roomIndexes == myRoomIndex) {
-            SetNewState();
-            PerformStateOperations();
-        }
+        SetNewState();
+        PerformStateOperations();
+        //if (RoomTransitionMovement.RoomSystem.roomIndexes == myRoomIndex) {
+        //    SetNewState();
+        //    PerformStateOperations();
+        //}
+        //else {
+        //    rb.SetVelocity(Vector2.zero);
+        //}
+        //myRoomIndex = RoomTransitionMovement.RoomIndex(transform.position);
     }
 
     private void PerformStateOperations() {
@@ -68,7 +75,7 @@ public class SkeletonController : MonoBehaviour
 
             case EnemyState.Knockback:
                 knockbackTimer -= Time.deltaTime;
-                rb.SetVelocity(knockbackDirection * knockback * 0.3f);
+                rb.SetVelocity(rb.GetVelocity() * knockbackDecel);
 
                 break;
 
