@@ -1,31 +1,49 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class RoomTransitionMovement : MonoBehaviour
-{
+public class RoomTransitionMovement : MonoBehaviour {
     public event EventHandler OnRoomTransitionEnter;
     public event EventHandler OnRoomTransitionExit;
 
     public static RoomTransitionMovement RoomSystem;
 
-    bool roomTransitionTrigger;
+    public List<Room> roomList;
 
-    public Vector2Int roomIndexes;
-    public bool isSmoothMovement = false;
-    public float smoothMovementSpeed = 4.0f;
-    public float smoothMinSpeed = 0.05f;
-    public float cameraSpeed = 14f;
+    public Vector2 cameraDimensions = new Vector2(13.5f, 7.5f);
 
-    public float cameraOffsetX = 0f;
-    public float cameraOffsetY = 0f;
-    public float roomSizeX = 18;
-    public float roomSizeY = 10;
+    public float smoothMovementSpeed = 8.0f;
+    public float smoothMinSpeed = 0.02f;
 
+    public Vector2 followPlayerLeeway = new Vector2(2,2);
+    public float followPlayerDecel = 0.9f;
+    public float followPlayerAccel = 2f;
+
+    bool isTransitioningRoom;
+    private int targetRoomIndex;
+    private Vector3 transitionTarget;
+    private int currentRoomIndex;
+    float smoothMinSpeedSqr;
+
+    private Vector2 velocity;
 
     //used to ignore any other camera effects
     private Vector3 previousPosition;
 
     GameObject player;
+
+#if UNITY_EDITOR
+    private void OnDrawGizmosSelected() {
+        Gizmos.color = Color.magenta;
+
+        foreach(Room r in roomList) {
+            Gizmos.DrawLine(r.GetTopLeftCorner(), r.GetTopRightCorner());
+            Gizmos.DrawLine(r.GetTopRightCorner(), r.GetBottomRightCorner());
+            Gizmos.DrawLine(r.GetBottomRightCorner(), r.GetBottomLeftCorner());
+            Gizmos.DrawLine(r.GetBottomLeftCorner(), r.GetTopLeftCorner());
+        }
+    }
+#endif
 
     void Awake() {
         if(RoomSystem = null) {
@@ -36,104 +54,109 @@ public class RoomTransitionMovement : MonoBehaviour
 
     void Start() {
         player = GameObject.FindGameObjectWithTag("Player");
-        SetGridIndexes();
         previousPosition = transform.position;
-        roomTransitionTrigger = false;
+        isTransitioningRoom = false;
+
+        smoothMinSpeedSqr = Mathf.Pow(smoothMinSpeed, 2);
+
+        SetGridIndexes();
     }
 
     private void Update() {
         //realigns camera after effects
         transform.position = previousPosition;
 
-        SetGridIndexes();
-
-        if(isSmoothMovement) {
+        if(isTransitioningRoom) {
             MoveCameraSmooth();
+            SnapCameraToRoom(smoothMinSpeedSqr);
         }
         else {
-            MoveCamera();
+            FollowPlayer();
         }
-        SnapCameraToRoom(smoothMinSpeed);
+
 
         //lock player's motion if camera is moving (for the NES feel)
-        if(CameraNeedsToMove()) {
-
-            if(!roomTransitionTrigger) {
-                OnRoomTransitionEnter?.Invoke(this, EventArgs.Empty);
-                roomTransitionTrigger = true;
-            }
-        }
-        else {
-            if(roomTransitionTrigger) {
-                //invoke this only once with trigger
-                OnRoomTransitionExit?.Invoke(this, EventArgs.Empty);
-            }
-            roomTransitionTrigger = false;
+        if(!isTransitioningRoom && RoomNeedsToSwitch()) {
+            OnRoomTransitionEnter?.Invoke(this, EventArgs.Empty);
+            transitionTarget = SetTargetPosition();
+            isTransitioningRoom = true;
         }
 
         previousPosition = transform.position;
     }
 
     private void SetGridIndexes() {
-        roomIndexes = RoomIndex(player.transform.position);
+        targetRoomIndex = RoomIndex(player.transform.position);
     }
 
-    public static Vector2Int RoomIndex(Vector2 position) {
-        // calculate grid
-        return new Vector2Int {
-            x = (int)Mathf.Floor((position.x - RoomSystem.cameraOffsetX + (RoomSystem.roomSizeX / 2f)) / RoomSystem.roomSizeX),
-            y = (int)Mathf.Floor((position.y - RoomSystem.cameraOffsetY + (RoomSystem.roomSizeY / 2f)) / RoomSystem.roomSizeY)
-        };
+    public static int RoomIndex(Vector2 position) {
+        for(int i = 0; i < RoomSystem.roomList.Count; i++) {
+            if(RoomSystem.roomList[i].Contains(position)) {
+                return i;
+            }
+        }
+
+        return -1;
     }
 
     private void SnapCameraToRoom(float leeway) {
         //snaps camera to correct position if slightly off to prevent overshooting the movement
-        if (Mathf.Abs(transform.position.x - (roomIndexes.x * roomSizeX + cameraOffsetX)) < leeway) {
-            transform.position = new Vector3(roomIndexes.x * roomSizeX + cameraOffsetX, transform.position.y, -10);
-        }
 
-        if (Mathf.Abs(transform.position.y - (roomIndexes.y * roomSizeY + cameraOffsetY)) < leeway) {
-            transform.position = new Vector3(transform.position.x, roomIndexes.y * roomSizeY + cameraOffsetY, -10);
+        if (Mathf.Abs(((Vector2) transform.position - (Vector2) transitionTarget).sqrMagnitude) < leeway) {
+            transform.position = transitionTarget + new Vector3(0, 0, -10f);
+
+            OnRoomTransitionExit?.Invoke(this, EventArgs.Empty);
+            velocity = Vector2.zero;
+            currentRoomIndex = targetRoomIndex;
+            isTransitioningRoom = false;
         }
     }
 
-    private void MoveCamera() {
-        // move camera if necessary
-        Vector3 deltaTransform = new Vector3(0, 0);
+    private Vector3 SetTargetPosition() {
+        Vector3 output = player.transform.position;
+        output.z = -10f;
 
+        return CorrectPosition(output);
+    }
 
-        // X
-        if (transform.position.x > roomIndexes.x * roomSizeX + cameraOffsetX) {
-            deltaTransform += new Vector3(-cameraSpeed * Time.deltaTime, 0);
+    private Vector3 CorrectPosition(Vector3 original) {
+        Room targetRoom = roomList[targetRoomIndex];
+
+        float xMinBound = targetRoom.Position.x - targetRoom.Size.x + cameraDimensions.x;
+        float xMaxBound = targetRoom.Position.x + targetRoom.Size.x - cameraDimensions.x;
+        float yMinBound = targetRoom.Position.y - targetRoom.Size.y + cameraDimensions.y;
+        float yMaxBound = targetRoom.Position.y + targetRoom.Size.y - cameraDimensions.y;
+
+        if (original.x < xMinBound) {
+            original.x = xMinBound;
         }
-        else if (transform.position.x < roomIndexes.x * roomSizeX + cameraOffsetX) {
-            deltaTransform += new Vector3(cameraSpeed * Time.deltaTime, 0);
+        else if (original.x > xMaxBound) {
+            original.x = xMaxBound;
         }
 
-        // Y
-        if (transform.position.y > roomIndexes.y * roomSizeY + cameraOffsetY) {
-            deltaTransform += new Vector3(0, -cameraSpeed * Time.deltaTime);
+        if (original.y < yMinBound) {
+            original.y = yMinBound;
         }
-        else if (transform.position.y < roomIndexes.y * roomSizeY + cameraOffsetY) {
-            deltaTransform += new Vector3(0, cameraSpeed * Time.deltaTime);
+        else if (original.y > yMaxBound) {
+            original.y = yMaxBound;
         }
 
-        transform.position += deltaTransform;
+        return original;
     }
 
     private void MoveCameraSmooth() {
         // move camera if necessary
         Vector3 deltaTransform = new Vector3(0, 0);
-        float Xdiff = roomIndexes.x * roomSizeX + cameraOffsetX - transform.position.x;
-        float Ydiff = roomIndexes.y * roomSizeY + cameraOffsetY - transform.position.y;
+        float Xdiff = transitionTarget.x - transform.position.x;
+        float Ydiff = transitionTarget.y - transform.position.y;
 
         // X
-        if (transform.position.x != roomIndexes.x * roomSizeX + cameraOffsetX) {
+        if (transform.position.x != roomList[targetRoomIndex].Position.x) {
             deltaTransform += new Vector3((Xdiff) * Time.deltaTime, 0);
         }
 
         // Y
-        if (transform.position.y != roomIndexes.y * roomSizeY + cameraOffsetY) {
+        if (transform.position.y != roomList[targetRoomIndex].Position.y) {
             deltaTransform += new Vector3(0, (Ydiff) * Time.deltaTime);
         }
 
@@ -148,7 +171,30 @@ public class RoomTransitionMovement : MonoBehaviour
         transform.position += deltaTransform;
     }
 
-    private bool CameraNeedsToMove() {
-        return ! ( (transform.position.x == roomIndexes.x * roomSizeX + cameraOffsetX) && (transform.position.y == roomIndexes.y * roomSizeY + cameraOffsetY));
+    private void FollowPlayer() {
+        if(transform.position.x > player.transform.position.x + followPlayerLeeway.x) {
+            velocity.x -= followPlayerAccel;
+        }
+        else if(transform.position.x < player.transform.position.x - followPlayerLeeway.x) {
+            velocity.x += followPlayerAccel;
+        }
+
+        if(transform.position.y > player.transform.position.y + followPlayerLeeway.y) {
+            velocity.y -= followPlayerAccel;
+        }
+        else if(transform.position.y < player.transform.position.y - followPlayerLeeway.y) {
+            velocity.y += followPlayerAccel;
+        }
+
+        velocity *= followPlayerDecel;
+
+        transform.position += (Vector3) velocity * Time.deltaTime;
+
+        transform.position = CorrectPosition(transform.position);
+    }
+
+    private bool RoomNeedsToSwitch() {
+        SetGridIndexes();
+        return targetRoomIndex != currentRoomIndex;
     }
 }
