@@ -32,7 +32,6 @@ public class ScreenShake : MonoBehaviour
         if(shakeTimer > 0) {
             if(shakeTimer % framesPerShake == 0) {
                 ShakeFrame();
-                shakeLevel -= 0.03f;
             }
             shakeTimer--;
         }

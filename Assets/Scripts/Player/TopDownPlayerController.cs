@@ -14,10 +14,12 @@ public enum PlayerState {
 [RequireComponent(typeof(Health))]
 public class TopDownPlayerController : MonoBehaviour {
     public float speed = 4f;
-    public float decelerationFactor = 0.85f;
+    public float accelFactor = 0.85f;
     public float knockback = 10f;
     public float knockbackTime = 0.1f;
     public float PostHitInvincibilityTime = 0.6f;
+
+    private Vector2 targetVelocity;
 
     private float knockbackTimer;
     private Vector2 knockbackDirection;
@@ -26,8 +28,6 @@ public class TopDownPlayerController : MonoBehaviour {
 
     public bool isI_frame;
     private float I_frameTimer;
-
-    //float timer;
 
     public PlayerState state { get; set;}
 
@@ -47,6 +47,7 @@ public class TopDownPlayerController : MonoBehaviour {
         state = PlayerState.Knockback;
         knockbackDirection = (transform.position - inflictorPosition).normalized;
         rb.SetVelocity(knockback * knockbackDirection);
+        targetVelocity = Vector3.zero;
     }
 
     void Start() {
@@ -62,7 +63,7 @@ public class TopDownPlayerController : MonoBehaviour {
         roomMovement.OnRoomTransitionExit += Unfreeze;
     }
 
-    void Update() {
+    void FixedUpdate() {
         input = GetNormalizedInput();
 
         CheckIFrames();
@@ -70,7 +71,12 @@ public class TopDownPlayerController : MonoBehaviour {
         SetNewState();
         PerformStateOperations();
 
-        rb.SetVelocity(rb.GetVelocity() * decelerationFactor);
+        ApplyAcceleration();
+    }
+
+    private void ApplyAcceleration() {
+
+        rb.AddVelocity(accelFactor * (targetVelocity - rb.GetVelocity()));
     }
 
     private void CheckIFrames() {
@@ -86,7 +92,7 @@ public class TopDownPlayerController : MonoBehaviour {
     private void PerformStateOperations() {
         switch (state) {
             case PlayerState.Idle:
-                //rb.SetVelocity(Vector2.zero);
+                targetVelocity = Vector3.zero;
 
                 break;
 
@@ -98,9 +104,6 @@ public class TopDownPlayerController : MonoBehaviour {
             case PlayerState.Knockback:
                 knockbackTimer -= Time.deltaTime;
                 isI_frame = true;
-
-                //pushes player back in the opposite direction they are facing.
-                //rb.SetVelocity(-(knockback * 0.3f) * knockbackDirection);
 
                 break;
 
@@ -150,7 +153,7 @@ public class TopDownPlayerController : MonoBehaviour {
     }
 
     private void MovePlayer() {
-        rb.SetVelocity(rb.GetVelocity() + input * speed);
+        targetVelocity = speed * input;
 
         if (Vector2.Dot(input, rb.GetDirection()) <= 0) {
             rb.SetDirection(new Vector2(input.x, input.y));
