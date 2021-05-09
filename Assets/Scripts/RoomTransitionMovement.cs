@@ -59,14 +59,27 @@ public class RoomTransitionMovement : MonoBehaviour {
 
         smoothMinSpeedSqr = Mathf.Pow(smoothMinSpeed, 2);
 
-        SetGridIndexes();
+        SetRoomIndex();
     }
 
     private void Update() {
         //realigns camera after effects
         transform.position = previousPosition;
 
-        if(isTransitioningRoom) {
+        SetRoomIndex();
+        Debug.Log($"{!isTransitioningRoom}, {RoomNeedsToSwitch()}, and {targetRoomIndex}");
+
+        // Based on player's position, decide whether to initiate transition to another room
+        if (!isTransitioningRoom && RoomNeedsToSwitch()) {
+            OnRoomTransitionEnter?.Invoke(this, EventArgs.Empty);
+            transitionTarget = SetTargetPosition();
+            isTransitioningRoom = true;
+            Debug.Log("Snap!");
+        }
+
+        // If transition initiated, quickly shift screen to the next room
+        // otherwise just follow the player within the current room
+        if (isTransitioningRoom) {
             MoveCameraSmooth();
             SnapCameraToRoom(smoothMinSpeedSqr);
         }
@@ -74,18 +87,10 @@ public class RoomTransitionMovement : MonoBehaviour {
             FollowPlayer();
         }
 
-
-        //lock player's motion if camera is moving (for the NES feel)
-        if(!isTransitioningRoom && RoomNeedsToSwitch()) {
-            OnRoomTransitionEnter?.Invoke(this, EventArgs.Empty);
-            transitionTarget = SetTargetPosition();
-            isTransitioningRoom = true;
-        }
-
         previousPosition = transform.position;
     }
 
-    private void SetGridIndexes() {
+    private void SetRoomIndex() {
         targetRoomIndex = RoomIndex(player.transform.position);
     }
 
@@ -120,6 +125,10 @@ public class RoomTransitionMovement : MonoBehaviour {
     }
 
     private Vector3 CorrectPosition(Vector3 original) {
+        if(targetRoomIndex == -1) {
+            return original;
+        }
+        
         Room targetRoom = roomList[targetRoomIndex];
 
         float xMinBound = targetRoom.Position.x - targetRoom.Size.x + cameraDimensions.x;
@@ -151,12 +160,12 @@ public class RoomTransitionMovement : MonoBehaviour {
         float Ydiff = transitionTarget.y - transform.position.y;
 
         // X
-        if (transform.position.x != roomList[targetRoomIndex].Position.x) {
+        if (transform.position.x != transitionTarget.x) {
             deltaTransform += new Vector3((Xdiff) * Time.deltaTime, 0);
         }
 
         // Y
-        if (transform.position.y != roomList[targetRoomIndex].Position.y) {
+        if (transform.position.y != transitionTarget.y) {
             deltaTransform += new Vector3(0, (Ydiff) * Time.deltaTime);
         }
 
@@ -190,11 +199,12 @@ public class RoomTransitionMovement : MonoBehaviour {
 
         transform.position += (Vector3) velocity * Time.deltaTime;
 
-        transform.position = CorrectPosition(transform.position);
+        if(targetRoomIndex != -1) {
+            transform.position = CorrectPosition(transform.position);
+        }
     }
 
     private bool RoomNeedsToSwitch() {
-        SetGridIndexes();
         return targetRoomIndex != currentRoomIndex;
     }
 }
