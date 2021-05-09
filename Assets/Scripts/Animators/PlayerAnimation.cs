@@ -25,6 +25,8 @@ public class PlayerAnimation : MonoBehaviour
         controller = gameObject.GetComponent<TopDownPlayerController>();
         anim = gameObject.GetComponent<Animator>();
         rb = gameObject.GetComponent<SimpleRigidbody>();
+        anim.SetFloat(DirectionXHash, rb.GetDirection().x);
+        anim.SetFloat(DirectionYHash, rb.GetDirection().y);
     }
 
     void Update() {

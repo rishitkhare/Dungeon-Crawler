@@ -57,6 +57,9 @@ public class SimpleRigidbody : MonoBehaviour
     public void SetVelocity(Vector2 velocity) {
         this.velocity = velocity;
     }
+    public void AddVelocity(Vector2 acceleration) {
+        this.velocity = velocity + acceleration;
+    }
 
     private void Move() {
         Vector2 deltaPosition = Vector2.zero;

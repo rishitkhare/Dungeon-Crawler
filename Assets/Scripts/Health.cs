@@ -3,6 +3,9 @@
 public class Health : MonoBehaviour
 {
     public int healthCapacity = 6;
+    public int shakeFrames = 3;
+    public float shakeIntensity = 2f;
+
     //public BoxCollider2D hurtBox;
     public string hurtTag;
 
@@ -29,7 +32,7 @@ public class Health : MonoBehaviour
 
     //only applies to enemies
     virtual public void TakeDamage(int damageLoss) {
-        ScreenShake.screenShaker.ShakeScreen(3, 2f);
+        ScreenShake.screenShaker.ShakeScreen(shakeFrames, shakeIntensity);
         healthPts -= Mathf.Abs(damageLoss);
         skellycontroller.Knockback(inflictorPosition);
 

@@ -5,6 +5,17 @@ using UnityEngine.Tilemaps;
 using System;
 using System.Linq;
 
+// Pathfinding node class:
+// This class is instanced once for every grid square at a time,
+// but only when the node is explored
+
+// There is quite a bit of inefficiency here because it instantiates
+// new nodes every time the pathfinding algorithm runs, resulting in
+// hundreds of objects being created every few seconds.
+
+// TODO: Refactor this code to reuse nodes instead of deleting and creating
+// nodes over and over again. Try using state machine with
+// {unexplored, frontier, explored}
 public class Node : IComparable<Node> {
     public Node Origin {get; private set; }
     public Vector3Int Position {get; private set; }
@@ -99,13 +110,11 @@ public class EnemyAI : MonoBehaviour {
                 controller.state = EnemyState.Walking;
                 stateAfterKnockback = EnemyState.Walking;
                 IdleClock = UnityEngine.Random.Range(3f, maxWalkTime);
-                Debug.Log($"Walking for {IdleClock} seconds");
             }
             else if(controller.state == EnemyState.Walking) {
                 controller.state = EnemyState.Idle;
                 stateAfterKnockback = EnemyState.Idle;
                 IdleClock = UnityEngine.Random.Range(1f, maxIdleTime);
-                Debug.Log($"Waiting for {IdleClock} seconds");
             }
         }
 
@@ -163,11 +172,14 @@ public class EnemyAI : MonoBehaviour {
         frontier.Add(new Node(null, currentTile, 0));
 
         int failsafe = 0;
-        Node finalNode = null;
+        Node finalNode;
+        int totalNodeCount = 1;
 
         while (true) {
 
-            //If you delete this line, it will become breadth search
+            // If you delete the sorting line, it will become breadth search
+            // We also actually don't need to sort the entire list here. We can
+            // just search for the minimum index using IComparable.
             frontier.Sort();
 
             Node n = frontier[0];
@@ -191,6 +203,7 @@ public class EnemyAI : MonoBehaviour {
                 for (int j = 0; j < 4; j++) {
                     if (availableDirections[j]) {
                         frontier.Add(new Node(n, directions[j], GetDistanceToPlayer(directions[j])));
+                        totalNodeCount++;
                     }
                 }
             }
@@ -198,13 +211,12 @@ public class EnemyAI : MonoBehaviour {
             failsafe++;
 
             if (failsafe > 400) {
-                Debug.Log("Path failed!");
                 GeneratePathfindVisuals();
                 yield break;
             }
 
-            //GeneratePathfindVisuals();
-            //yield return null;
+            GeneratePathfindVisuals();
+            yield return null;
         }
 
         path.Add(finalNode);
